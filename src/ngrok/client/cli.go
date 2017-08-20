@@ -36,6 +36,7 @@ Examples:
 `
 
 type Options struct {
+	cloudKey  string
 	config    string
 	logto     string
 	loglevel  string
@@ -54,6 +55,11 @@ func ParseArgs() (opts *Options, err error) {
 		flag.PrintDefaults()
 		fmt.Fprintf(os.Stderr, usage2)
 	}
+	
+	cloudKey := flag.String(
+		"cloudKey",
+		"",
+		"Your cloud key which you can find on cloud.kerberos.io")
 
 	config := flag.String(
 		"config",
@@ -98,6 +104,7 @@ func ParseArgs() (opts *Options, err error) {
 	flag.Parse()
 
 	opts = &Options{
+		cloudKey:    *cloudKey,
 		config:    *config,
 		logto:     *logto,
 		loglevel:  *loglevel,
